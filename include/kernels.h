@@ -6,11 +6,9 @@
 #define CUDA_KERNELS_H
 
 
-
 class kernels {
 
 };
-
 
 
 #endif //CUDA_KERNELS_H
