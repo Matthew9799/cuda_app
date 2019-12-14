@@ -9,12 +9,13 @@ if(UNIX)
     set(CMAKE_CXX_FLAGS -fPIC)
 
 elseif(WIN32)
-    set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
-endif(WIN32)
+    set(OpenCV_DIR "C:\\Program Files\\openCV\\openCV\\opencv\\build")
+    set(CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
+endif(UNIX)
 
 find_package(CUDA QUIET REQUIRED)
 
-
+find_package( OpenCV REQUIRED )
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
