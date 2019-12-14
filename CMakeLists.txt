@@ -33,8 +33,10 @@ set(
 cuda_add_executable(
         cuda_app
         main.cpp
-        src/kernels.cu
-        include/kernels.h
+        src/cuda_kernels.cu
+        src/opencl_kernels.cl
+        include/cuda_kernels.h
+        include/opencl_kernels.h
 )
 
 target_link_libraries(cuda_app Qt5::Widgets)
