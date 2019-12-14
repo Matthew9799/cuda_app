@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "include/kernels.h"
-//#include "juce_analytics/juce_analytics.h"
+#include <QApplication>
+#include <QPushButton>
 
-int main(int argc, const char *argv[]) {
+int main(int argc, const char **argv) {
     return 0;
 }

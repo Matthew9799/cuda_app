@@ -1,21 +1,22 @@
 cmake_minimum_required(VERSION 3.10)
 project(cuda)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 if(UNIX)
     set(CMAKE_CXX_FLAGS -fPIC)
-endif(UNIX)
+
+elseif(WIN32)
+    set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
+endif(WIN32)
 
 find_package(CUDA QUIET REQUIRED)
 
-find_package(JUCE REQUIRED
-        COMPONENTS
-        juce_core
-        juce_data_structures
-        juce_events
-        juce_graphics
-        juce_gui_basics
-        juce_gui_extra
-)
+
+
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 include_directories(
         include
@@ -33,3 +34,5 @@ cuda_add_executable(
         src/kernels.cu
         include/kernels.h
 )
+
+target_link_libraries(cuda_app Qt5::Widgets)
