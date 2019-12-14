@@ -5,13 +5,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS -fPIC)
-
 elseif(WIN32)
     set(OpenCV_DIR "C:\\Program Files\\openCV\\openCV\\opencv\\build")
     set(CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
-endif(UNIX)
+endif(UNIX AND NOT APPLE)
 
 find_package(CUDA QUIET REQUIRED)
 
