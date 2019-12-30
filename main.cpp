@@ -17,7 +17,7 @@ int main(int argc, const char **argv) {
 
     Mat result = proc.gaussian_blur(frame,3,1.0);
 
-    //imshow("result", result);
+    imshow("result", result);
     //Launch GUI to select image
 
     //assume we have image

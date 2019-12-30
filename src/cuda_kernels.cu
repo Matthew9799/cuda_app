@@ -1,7 +1,11 @@
 #include "../include/cuda_kernels.hpp"
 
 #define M_PI 3.14159265358979323846
-#define M_E 2.71828182845904523536
+
+/*
+ * Class constructor to retrieve all relevant cuda variables. May be removed later, but figured it might be
+ * useful to have this information when deciding on block or thread counts.
+ */
 
 cudaKernel::cudaKernel(void) {
     cudaDeviceProp devProp;
@@ -30,6 +34,10 @@ void check_error(cudaError_t status, const char *msg)
     }
 }
 
+/*
+ * Generate convolution matrix based on desired size and sigma values
+ */
+
 void gaussian_convolution(float *arr, int length, float sigma) {
     double r, s = 2.0 * sigma * sigma;
     double sum = 0.0; int index = 0, low = -length/2, high = length/2;
@@ -53,7 +61,6 @@ void gaussian_convolution(float *arr, int length, float sigma) {
 
 __global__ void cuda_gaussian_blur(const uchar *image, uchar *returnImage, const uint64 length, int kernelSize, float * conv) {
     int global_id = blockIdx.x * blockDim.x + threadIdx.x; // have pixel working on
-
 }
 
 /*
@@ -71,7 +78,6 @@ cv::Mat cudaKernel::gaussian_blur(const cv::Mat &frame, int kernelSize, float si
     uchar *host_image; // array for frame
     float *conv = (float*)malloc(kernelSize*kernelSize*sizeof(float));
     float *dev_conv;
-    float sumTotal = 0;
 
     if (frame.isContinuous()) {
         array->assign(frame.data, frame.data + frame.total());
@@ -81,12 +87,12 @@ cv::Mat cudaKernel::gaussian_blur(const cv::Mat &frame, int kernelSize, float si
         }
     }
 
-    if(kernelSize != 1) {
+    if(kernelSize > 1) {
         gaussian_convolution(conv, kernelSize, sigma);
-    }
-
-    for (int y = 0; y < kernelSize*kernelSize; y++) {
-        printf("%f \n",conv[y]);
+    } else if(kernelSize == 1) {
+        conv[0] = 1;
+    } else {
+        throw "Kernel size cannot be less than one";
     }
 
     host_image = array->data(); // convert image vector to prep array to copy to GPU
