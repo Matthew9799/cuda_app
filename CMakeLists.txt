@@ -20,6 +20,8 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 find_package(OpenCL REQUIRED)
 
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 include_directories(
         include
         src
@@ -35,8 +37,11 @@ cuda_add_executable(
         main.cpp
         src/cuda_kernels.cu
         src/opencl_kernels.cl
-        include/cuda_kernels.h
-        include/opencl_kernels.h
+        include/cuda_kernels.hpp
+        include/opencl_kernels.hpp
 )
 
 target_link_libraries(cuda_app Qt5::Widgets)
+target_link_libraries(cuda_app ${OpenCV_LIBS})
+target_link_libraries(cuda_app ${CUDA_LIBRARIES})
+target_link_libraries(cuda_app ${OPENCL_LIBRARIES})
