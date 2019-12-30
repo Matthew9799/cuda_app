@@ -4,6 +4,9 @@ project(cuda)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
+
+configure_file(matt.JPG matt.JPG COPYONLY)
 
 if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS -fPIC)
