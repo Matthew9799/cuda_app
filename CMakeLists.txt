@@ -16,35 +16,39 @@ elseif(WIN32)
 endif(UNIX AND NOT APPLE)
 
 find_package(CUDA QUIET REQUIRED)
-
 find_package( OpenCV REQUIRED )
-
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-
 find_package(OpenCL REQUIRED)
-
-include_directories(${OpenCV_INCLUDE_DIRS})
 
 include_directories(
         include
         src
+        ${OpenCL_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
 )
+
+LINK_DIRECTORIES(${OpenCL_LIBRARY})
 
 set(
         CUDA_NVCC_FLAGS
-        ${CUDA_NVCC_FLAGS};
+        "${CUDA_NVCC_FLAGS} -lOpenCL"
 )
 
 cuda_add_executable(
         cuda_app
         main.cpp
         src/cuda_kernels.cu
-        src/opencl_kernels.cl
+        src/accelerator.cpp
+        src/opencl_kernels.cpp
         include/cuda_kernels.hpp
+        include/accelerator.hpp
         include/opencl_kernels.hpp
 )
 
 target_link_libraries(cuda_app Qt5::Widgets)
-target_link_libraries(cuda_app ${OpenCV_LIBS})
 target_link_libraries(cuda_app ${CUDA_LIBRARIES})
-target_link_libraries(cuda_app ${OPENCL_LIBRARIES})
+target_link_libraries(cuda_app ${OpenCL_LIBRARY})
+target_link_libraries(cuda_app ${OpenCV_LIBS})
+
+
+

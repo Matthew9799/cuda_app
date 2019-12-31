@@ -3,6 +3,7 @@
 //
 #include <opencv2/imgproc/imgproc.hpp>
 #include <cmath>
+#include <cuda_runtime.h>
 
 #ifndef CUDA_CUDA_KERNELS_HPP
 #define CUDA_CUDA_KERNELS_HPP
@@ -19,6 +20,7 @@ private:
     char * name;
 public:
     cudaKernel();
+    static int test_device();
     cv::Mat gaussian_blur(const cv::Mat &frame, int kernelSize, float sigma);
 };
 
