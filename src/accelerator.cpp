@@ -11,7 +11,7 @@ cv::Mat Accelerator::gaussian_blur(const cv::Mat & frame, int kernelSize, float 
     result = dev.gaussian_blur(frame, kernelSize, sigma);
 #elif defined(opencl_compile_check)
     openCLKernel dev;
-    frame = dev.gaussian_blur(frame, kernelSize, sigma);
+    result = dev.gaussian_blur(frame, kernelSize, sigma);
 #else
     cpuKernel dev;
     result = dev.gaussian_blur(frame, kernelSize, sigma);
