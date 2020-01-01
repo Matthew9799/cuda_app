@@ -23,7 +23,7 @@ include_directories(
         ${OpenCV_INCLUDE_DIRS}
 )
 
-if(CUDA_FOUND)
+if(FALSE)
     message("-- Cuda found")
 
     set(
@@ -38,12 +38,14 @@ if(CUDA_FOUND)
             main.cpp
             src/cuda_kernels.cu
             src/accelerator.cpp
+            src/helper.cpp
             include/cuda_kernels.hpp
             include/accelerator.hpp
+            include/helper.hpp
     )
 
     target_link_libraries(cuda_app ${CUDA_LIBRARIES})
-elseif(OpenCL_FOUND)
+elseif(FALSE)
     message("-- OpenCL found")
 
     include_directories(${OpenCL_INCLUDE_DIRS})
@@ -57,8 +59,10 @@ elseif(OpenCL_FOUND)
             main.cpp
             src/opencl_kernels.cpp
             src/accelerator.cpp
+            src/helper.cpp
             include/opencl_kernels.hpp
             include/accelerator.hpp
+            include/helper.hpp
     )
 
     target_link_libraries(cuda_app ${OpenCL_LIBRARY})
@@ -74,8 +78,10 @@ elseif(OpenMP_FOUND)
             main.cpp
             src/accelerator.cpp
             src/cpu_kernels.cpp
+            src/helper.cpp
             include/accelerator.hpp
             include/cpu_kernels.hpp
+            include/helper.hpp
     )
 
 endif()

@@ -2,7 +2,7 @@
 // Created by Matt on 2019-12-14.
 //
 #include <opencv2/imgproc/imgproc.hpp>
-#include <cmath>
+#include "helper.hpp"
 
 #ifndef CUDA_CUDA_KERNELS_HPP
 #define CUDA_CUDA_KERNELS_HPP

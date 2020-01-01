@@ -1,5 +1,4 @@
 #include "../include/accelerator.hpp"
-
 /*
  * Performs Gaussian blur based on the proper device initialized
  */

@@ -2,6 +2,9 @@
 // Created by Matt on 2019-12-31.
 //
 #include <opencv2/imgproc/imgproc.hpp>
+#include <thread>
+#include <omp.h>
+#include "helper.hpp"
 
 #ifndef CUDA_CPU_KERNELS_HPP
 #define CUDA_CPU_KERNELS_HPP

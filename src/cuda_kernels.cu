@@ -1,7 +1,5 @@
 #include "../include/cuda_kernels.hpp"
 
-#define M_PI 3.14159265358979323846
-
 /*
  * Class constructor to retrieve all relevant cuda variables. May be removed later, but figured it might be
  * useful to have this information when deciding on block or thread counts.
@@ -32,26 +30,6 @@ void check_error(cudaError_t status, const char *msg)
         printf("%s:\n%s\nError Code: %d\n\n", msg, errorStr, status);
         exit(status); // bail out immediately (makes debugging easier)
     }
-}
-
-/*
- * Generate convolution matrix based on desired size and sigma values
- */
-
-void gaussian_convolution(float *arr, int length, float sigma) {
-    double r, s = 2.0 * sigma * sigma;
-    double sum = 0.0; int index = 0, low = -length/2, high = length/2;
-    // generating 5x5 kernel
-    for (int x = low; x <= high; x++) {
-        for (int y = low; y <= high; y++) {
-            r = sqrt(x * x + y * y);
-            arr[index] = ((exp(-(r * r) / s)) / (M_PI * s));
-            sum += arr[index++];
-        }
-    }
-    // normalising the Kernel
-    for (int i = 0; i < length*length; i++)
-        arr[i] /= sum;
 }
 
 /*
@@ -87,13 +65,13 @@ cv::Mat cudaKernel::gaussian_blur(const cv::Mat &frame, int kernelSize, float si
         }
     }
 
-    if(kernelSize > 1) {
-        gaussian_convolution(conv, kernelSize, sigma);
-    } else if(kernelSize == 1) {
+    if(kernelSize > 1 && kernelSize%2) {
+        helper::gaussian_convolution(conv, kernelSize, sigma);
+    } else if(kernelSize == 1 && kernelSize%2) {
         conv[0] = 1;
     } else {
-        delete(array);
-        throw "Kernel size cannot be less than one";
+        delete(conv);
+        throw "Kernel size cannot be less than one and kernel size must be odd";
     }
 
     host_image = array->data(); // convert image vector to prep array to copy to GPU

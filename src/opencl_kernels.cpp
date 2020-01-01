@@ -12,6 +12,7 @@ openCLKernel::openCLKernel() {
 
 
 cv::Mat openCLKernel::gaussian_blur(const cv::Mat & frame, int kernelSize, float sigma) {
+
     return cv::Mat();
 }
 
