@@ -22,19 +22,24 @@ cv::Mat cpuKernel::gaussian_blur(const cv::Mat & frame, int kernelSize, float si
     #pragma omp for
     for(int y = 0; y < frame.rows; y++) { // loop through rows
         for(int x = 0; x < frame.cols; x++) { // loop through columns
-
+            double b = 0.0, g = 0.0, r = 0.0;
             for(int y1 = -kernelSize/2; y1 <= kernelSize/2; y1++) { // loop through y val of conv matrix
                 for(int x1 = -kernelSize/2; x1 <= kernelSize/2; x1++) { // loop through x val of conv matrix
-
                     if(y+y1 >= 0 && y+y1 < frame.rows) { // check to see if out of bounds of rows
                         if(x+x1 >= 0 && x+x1 < frame.cols) {
-                            data.at<cv::Vec3b>(y,x)[0] = frame.at<cv::Vec3b>(y,x)[0]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // B
-                            data.at<cv::Vec3b>(y,x)[1] = frame.at<cv::Vec3b>(y,x)[1]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // G
-                            data.at<cv::Vec3b>(y,x)[2] = frame.at<cv::Vec3b>(y,x)[2]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // R
+                            b += frame.at<cv::Vec3b>(y,x)[0]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // B
+                            g += frame.at<cv::Vec3b>(y,x)[1]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // G
+                            r += frame.at<cv::Vec3b>(y,x)[2]*conv[(kernelSize/2+y1)*kernelSize+(kernelSize/2+x1)]; // R
                         }
                     }
                 }
             }
+            //printf("B: %d G: %d R: %d\n",frame.at<cv::Vec3b>(y,x)[0],frame.at<cv::Vec3b>(y,x)[1],frame.at<cv::Vec3b>(y,x)[2]);
+            //printf("B: %f G: %f R: %f\n",b,g,r);
+
+            data.at<cv::Vec3b>(y,x)[0] = b;
+            data.at<cv::Vec3b>(y,x)[1] = g;
+            data.at<cv::Vec3b>(y,x)[2] = r;
         }
     }
 
