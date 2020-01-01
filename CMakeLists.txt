@@ -12,10 +12,10 @@ elseif(WIN32)
     set(CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
 endif(UNIX AND NOT APPLE)
 
-find_package(CUDA QUIET REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(OpenCL REQUIRED)
-find_package(OpenMP REQUIRED)
+find_package(CUDA QUIET)
+find_package(OpenCV QUIET REQUIRED)
+find_package(OpenCL QUIET)
+find_package(OpenMP QUIET REQUIRED)
 
 include_directories(
         include
