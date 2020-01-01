@@ -6,7 +6,7 @@
 #ifndef CUDA_CPU_KERNELS_HPP
 #define CUDA_CPU_KERNELS_HPP
 
-class cpuKernels {
+class cpuKernel {
 private:
 
 public:

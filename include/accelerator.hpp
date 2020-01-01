@@ -7,6 +7,8 @@
 #include "cuda_kernels.hpp"
 #elif defined(opencl_compile_check)
 #include "opencl_kernels.hpp"
+#else
+#include "cpu_kernels.h"
 #endif
 
 #ifndef CUDA_ACCELERATOR_HPP

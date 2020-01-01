@@ -3,7 +3,7 @@
 //
 #include "../include/cpu_kernels.hpp"
 
-cv::Mat cpuKernels::gaussian_blur(const cv::Mat & frame, int kernelSize, float sigma) {
+cv::Mat cpuKernel::gaussian_blur(const cv::Mat & frame, int kernelSize, float sigma) {
     return new cv::Mat();
 }
 
