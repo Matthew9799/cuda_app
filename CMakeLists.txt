@@ -73,7 +73,9 @@ elseif(OpenMP_FOUND)
             cuda_app
             main.cpp
             src/accelerator.cpp
+            src/cpu_kernels.cpp
             include/accelerator.hpp
+            include/cpu_kernels.hpp
     )
 
 endif()
