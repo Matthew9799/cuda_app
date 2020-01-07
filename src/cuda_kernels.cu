@@ -38,7 +38,26 @@ void check_error(cudaError_t status, const char *msg)
  */
 
 __global__ void cuda_gaussian_blur(const uchar *image, uchar *returnImage, const uint64 length, int kernelSize, float * conv) {
-    int global_id = blockIdx.x * blockDim.x + threadIdx.x; // have pixel working on
+    int global_id = 3.0 * (blockIdx.x * blockDim.x + threadIdx.x); // have pixel working on
+    double b = 0.0, g = 0.0, r = 0.0;
+    int temp_id;
+
+    if(global_id < length) { // we have not exceeded the range of our array
+        for (int y1 = -kernelSize / 2; y1 <= kernelSize / 2; y1++) { // loop through y val of conv matrix
+            for (int x1 = -kernelSize / 2; x1 <= kernelSize / 2; x1++) { // loop through x val of conv matrix
+                if (y + y1 >= 0 && y + y1 < frame.rows) { // check to see if out of bounds of rows
+                    if (x + x1 >= 0 && x + x1 < frame.cols) {
+                        b += image[temp_id] * conv[(kernelSize / 2 + y1) * kernelSize + (kernelSize / 2 + x1)]; // B
+                        g += image[temp_id + 1] * conv[(kernelSize / 2 + y1) * kernelSize + (kernelSize / 2 + x1)]; // G
+                        r += image[temp_id + 2] * conv[(kernelSize / 2 + y1) * kernelSize + (kernelSize / 2 + x1)]; // R
+                    }
+                }
+            }
+        }
+        returnImage[temp_id] = b;
+        returnImage[temp_id + 1] = g;
+        returnImage[temp_id + 2] = r;
+    }
 }
 
 /*
