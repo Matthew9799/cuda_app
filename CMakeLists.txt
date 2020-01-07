@@ -23,7 +23,7 @@ include_directories(
         ${OpenCV_INCLUDE_DIRS}
 )
 
-if(FALSE)
+if(CUDA_FOUND)
     message("-- Cuda found")
 
     set(
@@ -45,7 +45,7 @@ if(FALSE)
     )
 
     target_link_libraries(cuda_app ${CUDA_LIBRARIES})
-elseif(FALSE)
+elseif(OpenCL_FOUND)
     message("-- OpenCL found")
 
     include_directories(${OpenCL_INCLUDE_DIRS})
