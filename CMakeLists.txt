@@ -23,7 +23,11 @@ include_directories(
         ${OpenCV_INCLUDE_DIRS}
 )
 
-if(CUDA_FOUND)
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+
+if(FALSE)
     message("-- Cuda found")
 
     set(
@@ -68,10 +72,6 @@ elseif(OpenCL_FOUND)
     target_link_libraries(cuda_app ${OpenCL_LIBRARY})
 elseif(OpenMP_FOUND)
     message("-- Nothing found")
-
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 
     add_executable(
             cuda_app

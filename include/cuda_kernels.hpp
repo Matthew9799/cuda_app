@@ -3,6 +3,8 @@
 //
 #include <opencv2/imgproc/imgproc.hpp>
 #include "helper.hpp"
+#include <omp.h>
+#include <thread>
 
 #ifndef CUDA_CUDA_KERNELS_HPP
 #define CUDA_CUDA_KERNELS_HPP
