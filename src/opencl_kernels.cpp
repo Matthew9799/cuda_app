@@ -106,8 +106,8 @@ cv::Mat openCLKernel::gaussian_blur(const cv::Mat & frame, int kernelSize, float
     kernel = clCreateKernel(program, "gaussian_blur", &err);
     // Create the input and output arrays in device memory for our calculation
     dev_image = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(uchar) * array->size(), NULL, NULL);
-    dev_result = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(uchar) * array->size(), NULL, NULL);
-    dev_conv = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float) * kernelSize * kernelSize, NULL, NULL);
+    dev_result = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(uchar) * array->size(), NULL, NULL);
+    dev_conv = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * kernelSize * kernelSize, NULL, NULL);
     // Copy data into GPU buffers
     err = clEnqueueWriteBuffer(queue, dev_image, CL_TRUE, 0, sizeof(uchar) * array->size(), host_image, 0, NULL, NULL);
     err |= clEnqueueWriteBuffer(queue, dev_conv, CL_TRUE, 0, sizeof(float) * kernelSize * kernelSize, conv, 0, NULL, NULL);
