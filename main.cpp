@@ -12,7 +12,7 @@ int main(int argc, const char **argv) {
 
     frame = imread("matt.JPG");
 
-    Mat result = dev.gaussian_blur(frame,5,4.0);
+    Mat result = dev.gaussian_blur(frame,3,4.0);
 
     imwrite("image.JPG", result);
 

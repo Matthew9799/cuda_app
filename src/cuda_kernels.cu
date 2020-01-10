@@ -69,7 +69,7 @@ __global__ void cuda_gaussian_blur(const uchar *image, uchar *returnImage, const
  */
 
 cv::Mat cudaKernel::gaussian_blur(const cv::Mat &frame, int kernelSize, float sigma) {
-    cv::Mat finalResult = cv::Mat(cv::Size(frame.cols, frame.rows), CV_8UC3);; // return data
+    cv::Mat finalResult = cv::Mat(cv::Size(frame.cols, frame.rows), CV_8UC3); // return data
     cudaError_t statusA; // error of initialization
     uchar *dev_imageA; // gpu pointer for image
     uchar *dev_imageB; // gpu pointer to return image

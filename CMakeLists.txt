@@ -41,7 +41,6 @@ if(CUDA_FOUND)
             cuda_app
             main.cpp
             src/cuda_kernels.cu
-            src/accelerator.cpp
             src/helper.cpp
             include/cuda_kernels.hpp
             include/accelerator.hpp
@@ -64,7 +63,6 @@ elseif(OpenCL_FOUND)
             cuda_app
             main.cpp
             src/opencl_kernels.cpp
-            src/accelerator.cpp
             src/helper.cpp
             include/opencl_kernels.hpp
             include/accelerator.hpp
@@ -78,7 +76,6 @@ elseif(OpenMP_FOUND)
     add_executable(
             cuda_app
             main.cpp
-            src/accelerator.cpp
             src/cpu_kernels.cpp
             src/helper.cpp
             include/accelerator.hpp
