@@ -27,7 +27,7 @@ set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 
-if(FALSE)
+if(CUDA_FOUND)
     message("-- Cuda found")
 
     set(
@@ -51,6 +51,8 @@ if(FALSE)
     target_link_libraries(cuda_app ${CUDA_LIBRARIES})
 elseif(OpenCL_FOUND)
     message("-- OpenCL found")
+
+    configure_file( src/opencl_kernels.cl opencl_kernels.cl COPYONLY)
 
     include_directories(${OpenCL_INCLUDE_DIRS})
 

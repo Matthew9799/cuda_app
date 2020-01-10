@@ -4,6 +4,8 @@
 //
 #include <opencv2/imgproc/imgproc.hpp>
 #include "helper.hpp"
+#include <omp.h>
+#include <thread>
 
 #ifndef CUDA_OPENCL_KERNELS_HPP
 #define CUDA_OPENCL_KERNELS_HPP

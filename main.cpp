@@ -15,10 +15,6 @@ int main(int argc, const char **argv) {
     Mat result = dev.gaussian_blur(frame,5,4.0);
 
     imwrite("image.JPG", result);
-    //Launch GUI to select image
-
-    //assume we have image
-
 
     return 0;
 }
