@@ -118,7 +118,7 @@ cv::Mat openCLKernel::gaussian_blur(const cv::Mat & frame, int kernelSize, float
     err |= clSetKernelArg(kernel, 3, sizeof(int), &kernelSize);
     err |= clSetKernelArg(kernel, 4, sizeof(cl_mem), &dev_conv);
     err |= clSetKernelArg(kernel, 5, sizeof(uint64), &frame.rows);
-    err |= clSetKernelArg(kernel, 5, sizeof(uint64), &frame.cols);
+    err |= clSetKernelArg(kernel, 6, sizeof(uint64), &frame.cols);
     // Execute the kernel over the entire range of the data set
     err = clEnqueueNDRangeKernel(queue, kernel, 1, NULL, &globalSize, &localSize, 0, NULL, NULL);
     // Wait for the command queue to get serviced before reading back results
