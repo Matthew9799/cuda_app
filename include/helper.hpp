@@ -11,7 +11,7 @@
 
 class helper {
 public:
-    static void gaussian_convolution(float *arr, int length, float sigma);
+    static float * gaussian_convolution(int length, float sigma, int flag);
 };
 
 #endif //CUDA_HELPER_H

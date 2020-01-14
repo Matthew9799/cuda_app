@@ -25,6 +25,7 @@ private:
 #endif
 public:
     cv::Mat gaussian_blur(const cv::Mat &frame, int kernelSize, float sigma) {return dev.gaussian_blur(frame, kernelSize, sigma);};
+    cv::Mat conv(const cv::Mat &frame, std::vector<std::vector<float>> &matrix) {return dev.conv_image(frame, matrix);};
 };
 
 #endif //CUDA_ACCELERATOR_HPP

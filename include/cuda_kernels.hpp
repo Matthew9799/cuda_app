@@ -22,6 +22,7 @@ private:
 public:
     cudaKernel();
     cv::Mat gaussian_blur(const cv::Mat &frame, int kernelSize, float sigma);
+    cv::Mat conv_image(const cv::Mat &frame, std::vector<std::vector<float>> &matrix);
 };
 
 #endif //CUDA_OPENCL_KERNELS_HPP
