@@ -28,10 +28,15 @@ int main(int argc, const char **argv) {
     data.at(2).push_back(-1.0f);
     data.at(2).push_back(-1.0f);
 
-    frame = imread("matt.JPG");
-    Mat result = dev.conv(frame,data);
+    VideoCapture cap;
+    cap.open(0);
 
-    imwrite("image.JPG", result);
+    while (1) {
+        cap >> frame;
+        Mat result = dev.conv(frame, data);
+        imshow("test", result);
+        waitKey(20);
+    }
 
     return 0;
 }

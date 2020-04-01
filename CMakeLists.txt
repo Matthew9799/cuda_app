@@ -3,8 +3,6 @@ project(cuda)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
 
-configure_file(matt.JPG matt.JPG COPYONLY)
-
 if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS -fPIC)
 elseif(WIN32)
@@ -26,6 +24,7 @@ include_directories(
 set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+
 
 if(CUDA_FOUND)
     message("-- Cuda found")
