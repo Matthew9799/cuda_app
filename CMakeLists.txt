@@ -3,13 +3,10 @@ project(cuda)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
 
-configure_file(matt.JPG matt.JPG COPYONLY)
-
 if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS -fPIC)
 elseif(WIN32)
     set(OpenCV_DIR "C:\\Program Files\\openCV\\openCV\\opencv\\build")
-    set(CMAKE_PREFIX_PATH "C:\\Qt\\5.12.6\\msvc2017_64")
 endif(UNIX AND NOT APPLE)
 
 find_package(CUDA QUIET)
@@ -82,7 +79,6 @@ elseif(OpenMP_FOUND)
             include/cpu_kernels.hpp
             include/helper.hpp
     )
-
 endif()
 
 target_link_libraries(cuda_app ${OpenCV_LIBS})
