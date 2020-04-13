@@ -30,13 +30,13 @@ int main(int argc, const char **argv) {
 
     VideoCapture cap;
     cap.open(0);
-    while(1) {
+
+    while (1) {
         cap >> frame;
         Mat result = dev.conv(frame, data);
         imshow("test", result);
         waitKey(20);
     }
-    //imwrite("image.JPG", result);
 
     return 0;
 }
